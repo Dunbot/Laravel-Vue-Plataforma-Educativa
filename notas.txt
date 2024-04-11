@@ -1,2 +1,0 @@
-Se utiliza Seeders, Jetstream con inertia
-manejos de roles y permiso usando spatie
