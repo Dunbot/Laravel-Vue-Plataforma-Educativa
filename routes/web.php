@@ -2,23 +2,31 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\RoleController;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+#Here we would work the routes for the user panel admin
 
+#Dont mix logic with routes function
+
+#Public Routes
+Route::get('/', [DashboardController::class, 'index']);
+
+
+#Private Routes
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::resource('/categories',CategoryController::class);
+    Route::resource('/lessons',LessonController::class);
+    Route::resource('/roles',RoleController::class);
 });
+
+#Resource help us with crud routes in one instruction
+
+

@@ -52,6 +52,24 @@ const logout = () => {
                                     Dashboard
                                 </NavLink>
                             </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" v-if="$page.props.user.permissions.includes('read categories')">
+                                <!--:href="route('dashboard')" is laravel routing-->
+                                <NavLink :href="route('categories.index')" :active="route().current('categories.*')">
+                                    Categories
+                                </NavLink>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" v-if="$page.props.user.permissions.includes('read lessons')">
+                                <!--:href="route('dashboard')" is laravel routing-->
+                                <NavLink :href="route('lessons.index')" :active="route().current('lessons.*')">
+                                    Lessons
+                                </NavLink>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" v-if="$page.props.user.permissions.includes('read roles')">
+                                <!--:href="route('dashboard')" is laravel routing-->
+                                <NavLink :href="route('roles.index')" :active="route().current('roles.*')">
+                                    Roles
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -196,6 +214,24 @@ const logout = () => {
                         </ResponsiveNavLink>
                     </div>
 
+                    <div class="pt-2 pb-3 space-y-1" v-if="$page.props.user.permissions.includes('read categories')">
+                        <ResponsiveNavLink :href="route('categories.index')" :active="route().current('categories.*')">
+                            Categories
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div class="pt-2 pb-3 space-y-1" v-if="$page.props.user.permissions.includes('read lessons')">
+                        <ResponsiveNavLink :href="route('lessons.index')" :active="route().current('lessons.*')">
+                            Lessons
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div class="pt-2 pb-3 space-y-1" v-if="$page.props.user.permissions.includes('read roles')">
+                        <ResponsiveNavLink :href="route('roles.index')" :active="route().current('roles.*')">
+                            Roles
+                        </ResponsiveNavLink>
+                    </div>
+
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
@@ -276,12 +312,13 @@ const logout = () => {
             <!-- Page Heading -->
             <header v-if="$slots.header" class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
+                    <slot name="header" /> <!-- All in template # header will be here-->
                 </div>
             </header>
 
             <!-- Page Content -->
             <main>
+                <!-- here will be our custom content-->
                 <slot />
             </main>
         </div>
